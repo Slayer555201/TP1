@@ -24,26 +24,7 @@ public class HiberNew {
         // TODO code application logic here
         SessionFactory sf = NewHibernateUtil.getSessionFactory();
         Session s = sf.openSession();
-        Transaction transaction = s.beginTransaction();
-        Documenty d = new Documenty();
-        s.persist(d);
-        //   s.save(d);
-
-        transaction.commit();
-
-        List<Documenty> q = s.createQuery("from Documenty s").list();
-        Transaction t = s.beginTransaction();
-        q.stream().map((u) -> {
-            System.out.print(u.getDataSozdanija());
-            return u;
-        }).map((u) -> {
-            u.setDataSozdanija(new Date());
-            return u;
-        }).forEachOrdered((u) -> {
-            s.update(u);
-        });
-        s.flush();
-        t.commit();
+    
 
         s.close();
     }
